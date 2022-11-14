@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Dashboard from './Dashboard';
 
 const Menu = () => {
     return (
@@ -6,6 +8,11 @@ const Menu = () => {
             <div class="navbar bg-base-100">
                 <div class="flex-1">
                     <a class="btn btn-ghost normal-case text-xl">Black Coffer</a>
+                </div>
+                <div>
+               <ul>
+               <li><Link to="/dashboard">Dashboard</Link></li>
+               </ul>
                 </div>
                 <div class="flex-none">
                     <div class="dropdown dropdown-end">

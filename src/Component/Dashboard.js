@@ -14,15 +14,13 @@ const Dashboard = () => {
                 <div className="drawer-side">
                     <label for="dashboard-sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4  overflow-y-auto w-48 bg-base-100 text-base-content">
-                        <li><Link to="/dashboard/myprofile">My Profile</Link></li>
+                        {/* <li><Link to="/dashboard/myprofile">My Profile</Link></li> */}
 
-                        <li><Link to="/dashboard/users">All Users</Link></li>
-                        <li><Link to="/dashboard/addservice">Add Service</Link></li>
-                        <li><Link to="/dashboard/manageorder">Manage Products</Link></li> 
-
-                    <li><Link to="/dashboard/myCard">My Card</Link></li>
-                    <li><Link to="/dashboard/addreview">Review</Link></li>
-
+                        <li><Link to="/dashboard/linechart">LineChart</Link></li>
+                        <li><Link to="/dashboard/barchart">BarChart</Link></li>
+                        <li><Link to="/dashboard/paichart">PaiChart</Link></li>
+                        <li><Link to="/dashboard/histogram">Histogram</Link></li>
+                        <li><Link to="/dashboard/timeseries">TimeSeries</Link></li>
                 </ul>
 
             </div>
