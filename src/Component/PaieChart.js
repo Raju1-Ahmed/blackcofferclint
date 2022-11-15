@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import LineChart from './LineChart';
 
 import Chart, {
     ArgumentAxis,
@@ -42,7 +41,7 @@ const PaieChart = () => {
                 .then((res) => res.json())
                 .then(data => {
                     // console.log("data from pieChart:", data.slice(0, 10));
-                    let arr = data.slice(100, 200)
+                    let arr = data.slice(150, 200)
                     console.log("data from arr:", arr);
                     let filterdArr = []
                     for (let i = 0; i < arr.length; i++) {
@@ -64,38 +63,27 @@ const PaieChart = () => {
         }
     }, []);
     return (
-        <div className='my-10'>
-            <h4 className='text-xl font-bold text-center my-12'>Purches Your Products</h4>
-            {/* <h4 className='text-xl font-bold text-center my-12'>Purches Your Products: {users.length}</h4> */}
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                {
-                    // users.map(user => <LineChart
-                    //     key={user._id}
-                    //     user={user}
-                    // ></LineChart>)
-                }
+        <div className='mr-5'>
+            <Chart
+                title="REPORT"
+                dataSource={users}
+                id="chart"
+            >
 
-                <Chart
-                    title="REPORT"
-                    dataSource={users}
-                    id="chart"
-                >
+                <ArgumentAxis tickInterval={20}>
+                    <Label format="decimal" />
+                </ArgumentAxis>
 
-                    <ArgumentAxis tickInterval={20}>
-                        <Label format="decimal" />
-                    </ArgumentAxis>
+                <Series
+                    type="bar"
+                />
 
-                    <Series
-                        type="bar"
-                    />
+                <Legend
+                    visible={false}
+                />
 
-                    <Legend
-                        visible={false}
-                    />
+            </Chart>
 
-                </Chart>
-
-            </div>
         </div>
     );
 };

@@ -7,7 +7,8 @@ const Menu = () => {
         <div>
             <div class="navbar bg-base-100">
                 <div class="flex-1">
-                    <a class="btn btn-ghost normal-case text-xl">Black Coffer</a>
+                    <a href=""><Link to="/">BlackCoffer</Link></a>
+
                 </div>
                 <div>
                <ul>

@@ -17,10 +17,8 @@ const Dashboard = () => {
                         {/* <li><Link to="/dashboard/myprofile">My Profile</Link></li> */}
 
                         <li><Link to="/dashboard/linechart">LineChart</Link></li>
-                        <li><Link to="/dashboard/barchart">BarChart</Link></li>
                         <li><Link to="/dashboard/paichart">PaiChart</Link></li>
                         <li><Link to="/dashboard/histogram">Histogram</Link></li>
-                        <li><Link to="/dashboard/timeseries">TimeSeries</Link></li>
                 </ul>
 
             </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SelectBox from 'devextreme-react/select-box';
 import Chart, {
@@ -12,16 +12,16 @@ import Chart, {
     Grid,
     Format,
 } from 'devextreme-react/chart';
-import service from './data.js';
+// import service from './data.js';
 
-const countriesInfo = service.getCountriesInfo();
-const energySources = service.getEnergySources();
-const types = ['line', 'stackedline', 'fullstackedline'];
+// const countriesInfo = service.getCountriesInfo();
+// const energySources = service.getEnergySources();
+// const types = ['line', 'stackedline', 'fullstackedline'];
 
 export const continentSources = [
-    { value: 'Habiganj', name: 'Habiganj' },
-    { value: 'Sylhet', name: 'Sylhet' },
+    { value: 'Bangladesh', name: 'Bangladesh' },
     { value: 'Dhaka', name: 'Dhaka' },
+    { value: 'Mymensingh', name: 'Mymensingh' },
     { value: 'Chitagang', name: 'Latin America & Caribbean' },
     { value: 'northamerica', name: 'Northern America' },
     { value: 'oceania', name: 'Oceania' },
@@ -33,7 +33,7 @@ export const populationData = [{
     asia: 502000000,
     europe: 163000000,
     latinamerica: 16000000,
-    northamerica: 2000000,
+    northamerica: 1000000,
     oceania: 2000000,
     total: 791000000,
 }, {
@@ -95,20 +95,42 @@ export const populationData = [{
 
 
 const LineChart = () => {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         type: 'line',
-    //     };
-    //     this.handleChange = this.handleChange.bind(this);
-    // }
+    const [users, setUsers] = useState([]);
+    console.log("data check", users)
+    useEffect(() => {
+        try {
+            fetch('https://blackcoffersever.onrender.com/allinfo')
+                .then((res) => res.json())
+                .then(data => {
+                    let arr = data.slice(150, 200)
+                    console.log("data from arr:", arr);
+                    let filterdArr = []
+                    for (let i = 0; i < arr.length; i++) {
+                        let element = arr[i];
+                        if (element.end_year && element.likelihood && element.intensity && element.relevance) {
 
+                            // console.log("element:", element);
+                            element.year = element.end_year
+                            element.oceania = element.likelihood
+                            element.northamerica = element.relevance
+                            element.total = element.intensity
+                            filterdArr.push(element)
+
+                        }
+                    }
+                    console.log("filterdArr:", filterdArr)
+                    setUsers(filterdArr)
+                })
+        } catch (error) {
+            console.log("error data fetch in piechart", error);
+        }
+    }, []);
     return (
         <div>
             <Chart
                 id="chart"
                 palette="Vintage"
-                dataSource={populationData}
+                dataSource={users}
             >
                 <CommonSeriesSettings
                     argumentField="year"
@@ -157,57 +179,9 @@ const LineChart = () => {
                 <Title text="Evolution of Population by Continent" />
             </Chart>
         </div>
-        // <React.Fragment>
-        //     <Chart
-        //         palette="Violet"
-        //         dataSource={countriesInfo}
-        //     >
-        //         <CommonSeriesSettings
-        //             argumentField="country"
-        //             type={this.state.type}
-        //         />
-        //         {
-        //             energySources.map((item) => <Series
-        //                 key={item.value}
-        //                 valueField={item.value}
-        //                 name={item.name} />)
-        //         }
-        //         <Margin bottom={20} />
-        //         <ArgumentAxis
-        //             valueMarginsEnabled={false}
-        //             discreteAxisDivisionMode="crossLabels"
-        //         >
-        //             <Grid visible={true} />
-        //         </ArgumentAxis>
-        //         <Legend
-        //             verticalAlignment="bottom"
-        //             horizontalAlignment="center"
-        //             itemTextPosition="bottom"
-        //         />
-        //         <Export enabled={true} />
-        //         <Title text="Energy Consumption in 2004">
-        //             <Subtitle text="(Millions of Tons, Oil Equivalent)" />
-        //         </Title>
-        //         <Tooltip enabled={true} />
-        //     </Chart>
-        //     <div className="options">
-        //         <div className="caption">Options</div>
-        //         <div className="option">
-        //             <span>Series Type </span>
-        //             <SelectBox
-        //                 dataSource={types}
-        //                 value={this.state.type}
-        //                 onValueChanged={this.handleChange}
-        //             />
-        //         </div>
-        //     </div>
-        // </React.Fragment>
+
     )
 }
-// handleChange(e) {
-//     this.setState({ type: e.value });
-//   }
-
 function customizeTooltip(pointInfo) {
     const items = pointInfo.valueText.split('\n');
     const color = pointInfo.point.getColor();
