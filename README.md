@@ -3,7 +3,7 @@
 
 * Here you can see D3  chart and DevExpress chart
 ## Fontend Link
-* https://tourmaline-eclair-2a9277.netlify.app/dashboard
+* https://tourmaline-eclair-2a9277.netlify.app
 
 # 1.Command Line
 
